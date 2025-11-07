@@ -1,8 +1,6 @@
 import * as motion from "motion/react-client";
 import SkillCard from "./ui/SkillCard";
 import { SOFT_SKILLS } from "../constants";
-import Technologies from "./Technologies";
-
 
 export default function About() {
   return (

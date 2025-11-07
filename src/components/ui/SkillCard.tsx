@@ -1,5 +1,5 @@
 import * as motion from "motion/react-client"
-import { Users, Code2 } from "lucide-react";
+import { Users, Code2, Rocket } from "lucide-react";
 import type { Skill } from "@/src/types";
 
 type SkillCardProps = {
@@ -11,6 +11,8 @@ function renderIcon(icon: string) {
   switch (icon) {
     case "code":
       return <Code2 className="text-blue-500" />
+    case "rocket":
+      return <Rocket className="text-blue-500" />
     default:
       return <Users className="text-blue-500" />
   }

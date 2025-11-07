@@ -1,13 +1,7 @@
 "use client";
 import { useState } from "react";
-import {
-  ArrowLeft,
-  ArrowRight
-} from "lucide-react";
-import About from "@/src/components/About";
-import Resume from "@/src/components/Resume";
-import Projects from "@/src/components/Projects";
-import Footer from "@/src/components/Footer";
+import ChangeTabContext from "@/src/context/ChangeTabContext";
+import RenderTab from "@/src/components/RenderTab";
 import { SECTIONS } from "@/src/constants";
 
 export default function Home() {
@@ -34,39 +28,15 @@ export default function Home() {
   }
 
   return (
-    <>
-      <section className="h-[92vh] bg-gray-50/10 overflow-auto flex flex-col items-center justify-center font-montserrat">
-        <div className="w-full h-full relative">
-          <div className="fixed z-100 top-1/2 bg-amber-200 w-full">
-            <button
-              className="absolute cursor-pointer left-5 bg-slate-500/10 p-1 rounded-full hover:bg-slate-200 transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110"
-              onClick={handlePrevSection}
-            >
-              <ArrowLeft className="text-gray-600 size-5" />
-            </button>
-
-            <button
-              className="absolute cursor-pointer right-5 bg-slate-500/10 p-1 rounded-full hover:bg-slate-200 transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110"
-              onClick={handleNextSection}
-            >
-              <ArrowRight className="text-gray-600 size-5" />
-            </button>
-          </div>
-
-          {currentSection.value === "presentation" && (
-            <Resume />
-          )}
-
-          {currentSection.value === "about" && (
-            <About />
-          )}
-
-          {currentSection.value === "projects" && (
-            <Projects />
-          )}
-        </div>
-      </section>
-      <Footer />
-    </>
+    <ChangeTabContext.Provider
+      value={{
+        handleNextSection,
+        handlePrevSection,
+        setCurrentSection,
+        currentSection
+      }}
+    >
+      <RenderTab />
+    </ChangeTabContext.Provider>
   );
 }

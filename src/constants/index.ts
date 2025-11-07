@@ -1,4 +1,4 @@
-import type { Project, Skill } from "../types";
+import type { Project, Section, Skill } from "../types";
 
 export const SOFT_SKILLS: Skill[] = [
   {
@@ -14,10 +14,10 @@ export const SOFT_SKILLS: Skill[] = [
     icon: 'code'
   },
   {
-    id: `${Date.now()}-clean-code2`,
-    title: 'Código Limpio',
-    description: 'Escribo código mantenible, escalable y siguiendo las mejores prácticas de la industria.',
-    icon: 'code'
+    id: `${Date.now()}-fast`,
+    title: 'Entrega Rápida',
+    description: 'Metodologías ágiles para entregar valor de forma continua y eficiente.',
+    icon: 'rocket'
   },
 ];
 
@@ -46,7 +46,7 @@ export const PROJECTS: Project[] = [
 ];
 
 
-export const SECTIONS = [
+export const SECTIONS: Section[] = [
   { label: 'Presentación', value: 'presentation', index: 1 },
   { label: 'Acerca de mi', value: 'about', index: 2 },
   { label: 'Mis proyectos', value: 'projects', index: 3 },

@@ -1,11 +1,24 @@
 import * as motion from "motion/react-client";
-import Link from "next/link";
-import { GithubIcon, Linkedin } from "lucide-react";
-import { URL_GITHUB, URL_LINKEDIN } from "../constants";
-import Photo from "@/src/images/me.svg";
 import Image from "next/image";
+import Link from "next/link";
+import {
+  GithubIcon,
+  Linkedin
+} from "lucide-react";
+import useChangeTab from "../hooks/useChangeTab";
+import Photo from "@/src/images/me.svg";
+import {
+  SECTIONS,
+  URL_GITHUB,
+  URL_LINKEDIN
+} from "../constants";
 
 export default function Resume() {
+
+  const {
+    setCurrentSection
+  } = useChangeTab();
+
   return (
     <>
       <motion.article
@@ -64,7 +77,10 @@ export default function Resume() {
           transition={{ duration: 0.7, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <button className="bg-blue-500 font-semibold px-5 py-1 rounded-md cursor-pointer text-sm hover:bg-blue-600 transition-all">
+          <button
+            className="bg-blue-500 font-semibold px-5 py-1 rounded-md cursor-pointer text-sm hover:bg-blue-600 transition-all"
+            onClick={() => setCurrentSection(SECTIONS[2])}
+          >
             Proyectos
           </button>
           <button className="border border-blue-500 font-semibold px-5 py-1 rounded-md cursor-pointer text-blue-500 text-sm hover:bg-blue-200  delay-75 transition-all">
