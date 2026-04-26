@@ -7,8 +7,9 @@ export type Skill = {
 }
 
 export type Project = Omit<Skill, 'icon'> & {
-  tools: [],
+  tools: string[],
   src: string
+  repositoryUrl: string
 }
 
 export type Section = {

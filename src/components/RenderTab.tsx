@@ -4,6 +4,7 @@ import About from "./About";
 import Projects from "./Projects";
 import Resume from "./Resume";
 import Footer from "./Footer";
+import { Hero } from "./Hero";
 
 export default function RenderTab() {
   return (
@@ -26,7 +27,7 @@ const CurrentTab = () => {
 
   switch (currentSection.value) {
     case "presentation":
-      return <Resume />
+      return <Hero />
     case "about":
       return <About />
     case "projects":

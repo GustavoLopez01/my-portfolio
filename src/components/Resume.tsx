@@ -97,14 +97,14 @@ export default function Resume() {
         >
           <Link
             className="cursor-pointer"
-            href={URL_GITHUB}
+            href={URL_LINKEDIN}
             target="_blank"
           >
             <Linkedin className="size-5 text-blue-500" />
           </Link>
           <Link
             className="cursor-pointer"
-            href={URL_LINKEDIN}
+            href={URL_GITHUB}
             target="_blank"
           >
             <GithubIcon className="size-5 text-blue-500" />

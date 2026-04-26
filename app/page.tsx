@@ -3,6 +3,11 @@ import { useState } from "react";
 import ChangeTabContext from "@/src/context/ChangeTabContext";
 import RenderTab from "@/src/components/RenderTab";
 import { SECTIONS } from "@/src/constants";
+import { Hero } from "@/src/components/Hero";
+import About from "@/src/components/About";
+import Projects from "@/src/components/Projects";
+import Experience from "@/src/components/Experience";
+import Nabvar from "@/src/components/Nabvar";
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState(SECTIONS[0]);
@@ -36,7 +41,13 @@ export default function Home() {
         currentSection
       }}
     >
-      <RenderTab />
+      <div className="relative min-h-screen bg-background text-foreground dark">
+        <Nabvar />
+        <Hero />
+        <About />
+        <Projects />
+        <Experience />
+      </div>
     </ChangeTabContext.Provider>
   );
 }
