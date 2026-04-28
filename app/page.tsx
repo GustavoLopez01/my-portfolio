@@ -41,7 +41,7 @@ export default function Home() {
         currentSection
       }}
     >
-      <div className="relative min-h-screen bg-background text-foreground dark">
+      <div className="relative min-h-screen bg-background text-foreground">
         <Nabvar />
         <Hero />
         <About />
