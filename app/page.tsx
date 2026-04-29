@@ -1,14 +1,13 @@
 "use client";
 import { useState } from "react";
 import ChangeTabContext from "@/src/context/ChangeTabContext";
-import RenderTab from "@/src/components/RenderTab";
-import { SECTIONS } from "@/src/constants";
-import { Hero } from "@/src/components/Hero";
 import About from "@/src/components/About";
 import Projects from "@/src/components/Projects";
 import Experience from "@/src/components/Experience";
 import Nabvar from "@/src/components/Nabvar";
 import Footer from "@/src/components/Footer";
+import { Hero } from "@/src/components/Hero";
+import { SECTIONS } from "@/src/constants";
 import { Language } from "@/src/types";
 
 export default function Home() {
