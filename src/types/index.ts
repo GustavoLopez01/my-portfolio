@@ -17,3 +17,5 @@ export type Section = {
   value: string
   index: number
 }
+
+export type Language = 'es' | 'en';

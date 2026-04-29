@@ -8,9 +8,12 @@ import About from "@/src/components/About";
 import Projects from "@/src/components/Projects";
 import Experience from "@/src/components/Experience";
 import Nabvar from "@/src/components/Nabvar";
+import Footer from "@/src/components/Footer";
+import { Language } from "@/src/types";
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState(SECTIONS[0]);
+  const [language, setLanguage] = useState<Language>("es");
 
   const handleNextSection = () => {
     const index = currentSection.index;
@@ -42,11 +45,15 @@ export default function Home() {
       }}
     >
       <div className="relative min-h-screen bg-background text-foreground">
-        <Nabvar />
-        <Hero />
+        <Nabvar
+          language={language}
+          setLanguage={setLanguage}
+        />
+        <Hero language={language} />
         <About />
         <Projects />
         <Experience />
+        <Footer />
       </div>
     </ChangeTabContext.Provider>
   );

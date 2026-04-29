@@ -1,11 +1,24 @@
 import { motion } from "motion/react";
 import { Github, Linkedin, Mail } from "lucide-react";
-// import Nabvar from "./Nabvar"; // Asegúrate de que el nombre sea correcto (Navbar)
+import { Language } from "../types";
+import { useMemo } from "react";
+import { HERO_DATA } from "../constants/hero";
 
-export function Hero() {
+type HeroProps = {
+  language: Language
+}
+
+export function Hero({
+  language
+}: HeroProps) {
+
+  const data = useMemo(() => {
+    return HERO_DATA[language];
+  }, [language]);
+  
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background text-foreground transition-colors duration-500">
-      
+
       {/* 1. Fondo Gradiente dinámico */}
       {/* Cambiamos violet-950 por algo más suave en light mode y usamos variables */}
       {/* <div className="absolute inset-0 bg-linear-to-br from-violet-500/10 via-background to-cyan-500/10 dark:from-violet-950/40 dark:to-cyan-950/40">
@@ -14,7 +27,7 @@ export function Hero() {
       </div> */}
 
       {/* 2. Grid pattern (bajamos la opacidad para que no brille tanto en light) */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size[4rem_4rem] [mask-image:radial-gradient(ellipse_at_center,white,transparent)]"></div>
+      {/* <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size[4rem_4rem] [mask-image:radial-gradient(ellipse_at_center,white,transparent)]"></div> */}
 
       <div className="relative z-10 max-w-6xl mx-auto px-8 py-32 text-center">
         <motion.div
@@ -24,37 +37,37 @@ export function Hero() {
         >
           {/* Badge: Usamos border-border en lugar de border-white */}
           <div className="inline-block mb-6 px-6 py-2 rounded-full bg-muted/30 backdrop-blur-sm border border-border">
-            <span className="text-sm text-muted-foreground font-medium">Available for freelance work</span>
+            <span className="text-sm text-muted-foreground font-medium">{data.job}</span>
           </div>
 
           {/* 3. El Título (CRÍTICO): Cambiamos 'from-white' por 'from-foreground' */}
-          <h1 className="text-6xl md:text-7xl lg:text-8xl mb-6 bg-linear-to-r from-foreground via-foreground to-foreground/80 bg-clip-text text-transparent font-bold tracking-tight">
+          <h1 className="text-6xl md:text-5xl lg:text-6xl pb-6 bg-linear-to-r from-foreground via-foreground to-foreground/80 bg-clip-text text-transparent font-bold tracking-tight">
             Gustavo Alejandro López Zárate
           </h1>
 
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12">
-            Building scalable and beautiful web applications with modern technologies
+            {data.description}
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center mb-16">
             {/* Botón Principal: Usamos primary y primary-foreground */}
             <motion.a
               href="#projects"
-              className="px-8 py-4 rounded-xl hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/20"
+              className="px-8 py-4 font-semibold rounded-xl hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/20"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              View Projects
+              {data.projects}
             </motion.a>
 
             {/* Botón Secundario: Usamos bordes definidos en CSS */}
             <motion.a
               href="#contact"
-              className="px-8 py-4 rounded-xl bg-secondary/50 backdrop-blur-sm border border-border hover:bg-secondary transition-all duration-300"
+              className="px-8 py-4 font-semibold rounded-xl hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/20"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Get in Touch
+              {data.contact}
             </motion.a>
           </div>
 
