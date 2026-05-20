@@ -1,26 +1,20 @@
+import { useMemo } from "react";
 import { motion } from "motion/react";
+import { Language } from "../types";
+import { EXPERIENCE } from "../constants/experience";
 
-export default function Experience() {
-  const experiences = [
-    {
-      year: "2023 - Present",
-      role: "Senior Full-Stack Developer",
-      company: "TechCorp Inc.",
-      description: "Leading development of enterprise SaaS platform serving 10K+ users. Architected microservices infrastructure and improved performance by 40%.",
-    },
-    {
-      year: "2021 - 2023",
-      role: "Full-Stack Developer",
-      company: "StartupXYZ",
-      description: "Built core features for fintech application. Implemented real-time data synchronization and payment processing systems.",
-    },
-    {
-      year: "2019 - 2021",
-      role: "Frontend Developer",
-      company: "Digital Agency Co.",
-      description: "Developed responsive web applications for Fortune 500 clients. Specialized in React and modern JavaScript frameworks.",
-    },
-  ];
+type ExperienceProps = {
+  language: Language
+}
+
+export default function Experience({
+  language
+}: ExperienceProps) {
+
+  const data = useMemo(() => {
+    return EXPERIENCE[language];
+  }, [language]);
+
   return (
     <section id="experience" className="py-32 px-8 relative">
       <div className="max-w-4xl mx-auto">
@@ -42,10 +36,10 @@ export default function Experience() {
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-violet-500/50 via-cyan-500/50 to-violet-500/50"></div>
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-linear-to-b from-violet-500/50 via-cyan-500/50 to-violet-500/50"></div>
 
           <div className="space-y-16">
-            {experiences.map((exp, index) => (
+            {data.experiences.map((exp, index) => (
               <motion.div
                 key={exp.company}
                 initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
@@ -56,7 +50,7 @@ export default function Experience() {
                   }`}
               >
                 {/* Timeline dot */}
-                <div className="absolute left-0 md:left-1/2 w-4 h-4 -ml-2 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 ring-4 ring-background"></div>
+                <div className="absolute left-0 md:left-1/2 w-4 h-4 -ml-2 rounded-full bg-linear-to-br from-violet-500 to-cyan-500 ring-4 ring-background"></div>
 
                 {/* Content card */}
                 <div className={`w-full md:w-5/12 ml-8 md:ml-0 ${index % 2 === 0 ? "md:mr-auto md:pr-12" : "md:ml-auto md:pl-12"}`}>

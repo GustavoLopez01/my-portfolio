@@ -8,7 +8,7 @@ export const HERO_DATA = {
   en: {
     job: "Full-stack developer",
     description: "Building scalable and beautiful web applications with modern technologies",
-    projects: "View projects",
+    projects: "Projects",
     contact: "Contact"
   },
 }

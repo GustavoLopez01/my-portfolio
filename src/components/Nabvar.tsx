@@ -2,6 +2,7 @@ import { useTheme } from "next-themes";
 import { motion } from "motion/react";
 import { Globe, Moon, Sun } from "lucide-react";
 import { Language } from "../types";
+import { useEffect } from "react";
 
 type NabvarProps = {
   language: Language
@@ -13,10 +14,13 @@ export default function Nabvar({
   setLanguage
 }: NabvarProps) {
 
-  const { setTheme, theme } = useTheme()
+  const { setTheme, theme } = useTheme();
+
   const test = () => {
     setTheme(theme === "light" ? "dark" : "light");
   }
+
+  useEffect(() => setTheme("light"), []);
 
   return (
     <nav className="fixed w-full h-16 z-100">
