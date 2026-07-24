@@ -1,22 +1,34 @@
-import * as motion from "motion/react-client";
-import Link from "next/link";
-import { Linkedin, GithubIcon } from "lucide-react";
-import { URL_GITHUB, URL_LINKEDIN } from "../constants";
-
 export default function Footer() {
   return (
-    <>
-      <motion.div
-        className="h-[8vh] z-10 border border-gray-200 flex flex-col gap-2 justify-center items-center bg-white"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
+    <footer
+      style={{
+        padding: '28px 48px',
+        borderTop: '1px solid var(--border)',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}
+    >
+      <span
+        style={{
+          fontFamily: "'JetBrains Mono', monospace",
+          fontSize: '10px',
+          color: 'rgba(240,237,230,0.2)',
+          letterSpacing: '0.1em',
+        }}
       >
-        <span className="text-gray-600 text-sm">
-          © {new Date().getFullYear()} Todos los derechos reservados
-        </span>
-      </motion.div>
-    </>
+        © 2024 Juan Díaz — Built with React + Vite
+      </span>
+      <span
+        style={{
+          fontFamily: "'JetBrains Mono', monospace",
+          fontSize: '10px',
+          color: 'rgba(240,237,230,0.2)',
+          letterSpacing: '0.1em',
+        }}
+      >
+        Diseño & Código propio
+      </span>
+    </footer>
   )
 }

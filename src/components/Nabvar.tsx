@@ -1,57 +1,68 @@
-import { useTheme } from "next-themes";
-import { motion } from "motion/react";
-import { Globe, Moon, Sun } from "lucide-react";
-import { Language } from "../types";
-import { useEffect } from "react";
+import { useEffect, useState } from 'react';
 
-type NabvarProps = {
-  language: Language
-  setLanguage: (language: 'es' | 'en') => void
+function NavLink({
+  href,
+  children
+}: { href: string; children: React.ReactNode }) {
+  const [hovered, setHovered] = useState(false)
+  return (
+    <a
+      className={`text-[12px] tracking-wider uppercase transition-all ${hovered ? 'opacity-100' : 'opacity-45'}`}
+      href={href}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {children}
+    </a>
+  )
 }
 
-export default function Nabvar({
-  language,
-  setLanguage
-}: NabvarProps) {
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false)
 
-  const { setTheme, theme } = useTheme();
+  useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > 64)
+    window.addEventListener('scroll', fn)
+    return () => window.removeEventListener('scroll', fn)
+  }, [])
 
-  const test = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  }
-
-  useEffect(() => setTheme("light"), []);
+  const links = [
+    { label: 'Sobre mí', href: '#about' },
+    { label: 'Proyectos', href: '#projects' },
+    { label: 'Habilidades', href: '#skills' },
+    { label: 'Contacto', href: '#contact' },
+  ]
 
   return (
-    <nav className="fixed w-full h-16 z-100">
-      <motion.div
-        className="h-full grid grid-cols-1 px-5 md:px-20 bg-background drop-shadow-md"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+    <nav
+      className="fixed flex justify-between items-center top-0 left-0 right-0 z-100 py-12 px-5"
+      style={{
+        padding: '20px 48px',
+        background: scrolled ? 'rgba(8,8,8,0.88)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(14px)' : 'none',
+        borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
+        transition: 'all 0.35s ease',
+      }}
+    >
+      <a
+        href="#hero"
+        style={{
+          fontFamily: "'DM Serif Display', serif",
+          fontSize: '20px',
+          letterSpacing: '-0.02em',
+          color: 'var(--fg)',
+          textDecoration: 'none',
+        }}
       >
-        <div className="h-full flex justify-end items-center gap-5">
-          <button
-            className="rounded-full flex gap-2 p-2 cursor-pointer transition-all hover:bg-white/20"
-            onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}
-          >
-            <span>
-              {language.toUpperCase()}
-            </span>
-            <Globe />
-          </button>
-          <button
-            className="rounded-full p-2 cursor-pointer transition-all hover:bg-white/20"
-            onClick={test}
-          >
-            {theme === "dark" ? (
-              <Sun className="text-white" />
-            ) : (
-              <Moon className="text-black" />
-            )}
-          </button>
-        </div>
-      </motion.div>
+        GL.<span style={{ color: 'var(--accent)' }}>dev</span>
+      </a>
+      <div style={{ display: 'flex', gap: '40px' }}>
+        {links.map(({ label, href }) => (
+          <NavLink key={href} href={href}>
+            {label}
+          </NavLink>
+        ))}
+      </div>
     </nav>
   )
 }

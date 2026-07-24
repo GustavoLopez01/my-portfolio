@@ -1,111 +1,212 @@
-import { motion } from "motion/react";
-import { Github, Linkedin, Mail } from "lucide-react";
-import { Language } from "../types";
-import { useMemo } from "react";
-import { HERO_DATA } from "../constants/hero";
+import { useEffect, useRef, useState } from 'react';
+import useScramble from '../hooks/useScramble';
 
-type HeroProps = {
-  language: Language
+function MagneticBtn({
+  href,
+  primary,
+  children,
+}: {
+  href: string
+  primary?: boolean
+  children: React.ReactNode
+}) {
+  const ref = useRef<HTMLAnchorElement>(null)
+  const [pos, setPos] = useState({ x: 0, y: 0 })
+
+  const onMove = (e: React.MouseEvent) => {
+    const r = ref.current!.getBoundingClientRect()
+    setPos({
+      x: (e.clientX - r.left - r.width / 2) * 0.22,
+      y: (e.clientY - r.top - r.height / 2) * 0.22,
+    })
+  }
+
+  return (
+    <a
+      ref={ref}
+      href={href}
+      onMouseMove={onMove}
+      onMouseLeave={() => setPos({ x: 0, y: 0 })}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        padding: '14px 32px',
+        fontSize: '13px',
+        fontWeight: 500,
+        letterSpacing: '0.06em',
+        textDecoration: 'none',
+        cursor: 'pointer',
+        transform: `translate(${pos.x}px, ${pos.y}px)`,
+        transition: 'transform 0.35s ease',
+        ...(primary
+          ? { background: 'var(--accent)', color: '#080808', border: 'none' }
+          : {
+            background: 'transparent',
+            color: 'var(--fg)',
+            border: '1px solid rgba(240,237,230,0.18)',
+          }),
+      }}
+    >
+      {children}
+    </a>
+  )
 }
 
-export function Hero({
-  language
-}: HeroProps) {
+export default function Hero() {
+  const [ready, setReady] = useState(false)
+  const subtitle = useScramble('Desarrollador Web Full Stack', ready)
 
-  const data = useMemo(() => {
-    return HERO_DATA[language];
-  }, [language]);
-  
+  useEffect(() => {
+    const t = setTimeout(() => setReady(true), 400)
+    return () => clearTimeout(t)
+  }, [])
+
+  const fade = (delay: number): React.CSSProperties => ({
+    opacity: ready ? 1 : 0,
+    transform: ready ? 'translateY(0)' : 'translateY(28px)',
+    transition: `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s`,
+  })
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background text-foreground transition-colors duration-500">
+    <section
+      id="hero"
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '0 48px',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* grid texture */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage:
+            'linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)',
+          backgroundSize: '64px 64px',
+          opacity: 0.6,
+          pointerEvents: 'none',
+        }}
+      />
 
-      {/* 1. Fondo Gradiente dinámico */}
-      {/* Cambiamos violet-950 por algo más suave en light mode y usamos variables */}
-      {/* <div className="absolute inset-0 bg-linear-to-br from-violet-500/10 via-background to-cyan-500/10 dark:from-violet-950/40 dark:to-cyan-950/40">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-violet-500/10 dark:from-violet-600/20 via-transparent to-transparent"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,var(--tw-gradient-stops))] from-cyan-500/10 dark:from-cyan-600/20 via-transparent to-transparent"></div>
-      </div> */}
+      {/* glow orb */}
+      <div
+        style={{
+          position: 'absolute',
+          right: '8%',
+          top: '28%',
+          width: '480px',
+          height: '480px',
+          background: 'radial-gradient(circle, rgba(207,255,71,0.07) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }}
+      />
 
-      {/* 2. Grid pattern (bajamos la opacidad para que no brille tanto en light) */}
-      {/* <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size[4rem_4rem] [mask-image:radial-gradient(ellipse_at_center,white,transparent)]"></div> */}
-
-      <div className="relative z-10 max-w-6xl mx-auto px-8 py-32 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+      <div style={{ position: 'relative', maxWidth: '960px' }}>
+        <p
+          style={{
+            ...fade(0.15),
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: '11px',
+            letterSpacing: '0.16em',
+            color: 'var(--accent)',
+            textTransform: 'uppercase',
+            marginBottom: '28px',
+          }}
         >
-          {/* Badge: Usamos border-border en lugar de border-white */}
-          <div className="inline-block mb-6 px-6 py-2 rounded-full bg-muted/30 backdrop-blur-sm border border-border">
-            <span className="text-sm text-muted-foreground font-medium">{data.job}</span>
-          </div>
+          ◆ Disponible para nuevos proyectos
+        </p>
 
-          {/* 3. El Título (CRÍTICO): Cambiamos 'from-white' por 'from-foreground' */}
-          <h1 className="text-6xl md:text-5xl lg:text-6xl pb-6 bg-linear-to-r from-foreground via-foreground to-foreground/80 bg-clip-text text-transparent font-bold tracking-tight">
-            Gustavo Alejandro López Zárate
-          </h1>
+        <h1
+          style={{
+            ...fade(0.28),
+            fontFamily: "'DM Serif Display', serif",
+            fontSize: 'clamp(60px, 9vw, 120px)',
+            lineHeight: '0.92',
+            letterSpacing: '-0.045em',
+            marginBottom: '12px',
+          }}
+        >
+          Gustavo
+          <br />
+          <span style={{ color: 'var(--accent)' }}>López</span>
+        </h1>
 
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12">
-            {data.description}
-          </p>
+        <h2
+          style={{
+            ...fade(0.4),
+            fontFamily: "'DM Serif Display', serif",
+            fontSize: 'clamp(24px, 3.5vw, 52px)',
+            fontStyle: 'italic',
+            color: 'rgba(240,237,230,0.3)',
+            letterSpacing: '-0.03em',
+            marginBottom: '36px',
+            lineHeight: '1.1',
+          }}
+        >
+          {subtitle}
+        </h2>
 
-          <div className="flex flex-wrap gap-4 justify-center mb-16">
-            {/* Botón Principal: Usamos primary y primary-foreground */}
-            <motion.a
-              href="#projects"
-              className="px-8 py-4 font-semibold rounded-xl hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/20"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {data.projects}
-            </motion.a>
+        <p
+          style={{
+            ...fade(0.52),
+            fontSize: '17px',
+            lineHeight: '1.75',
+            color: 'rgba(240,237,230,0.5)',
+            maxWidth: '500px',
+            marginBottom: '52px',
+          }}
+        >
+          Construyo interfaces que no solo se ven bien — se&nbsp;<em>sienten</em>&nbsp;bien.
+          Rápidas, accesibles y con esa atención al detalle que separa lo bueno de lo memorable.
+        </p>
 
-            {/* Botón Secundario: Usamos bordes definidos en CSS */}
-            <motion.a
-              href="#contact"
-              className="px-8 py-4 font-semibold rounded-xl hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/20"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {data.contact}
-            </motion.a>
-          </div>
-
-          {/* Iconos Sociales: Quitamos bg-white/5 */}
-          <div className="flex gap-6 justify-center">
-            {[
-              { Icon: Github, href: "#", label: "GitHub" },
-              { Icon: Linkedin, href: "#", label: "LinkedIn" },
-              { Icon: Mail, href: "#contact", label: "Email" },
-            ].map(({ Icon, href, label }) => (
-              <motion.a
-                key={label}
-                href={href}
-                className="p-3 rounded-xl bg-muted/50 border border-border hover:border-primary/50 text-foreground/70 hover:text-foreground transition-all duration-300"
-                whileHover={{ y: -4 }}
-                aria-label={label}
-              >
-                <Icon className="w-6 h-6" />
-              </motion.a>
-            ))}
-          </div>
-        </motion.div>
+        <div style={{ ...fade(0.64), display: 'flex', gap: '14px' }}>
+          <MagneticBtn href="#projects" primary>
+            Ver mi trabajo
+          </MagneticBtn>
+          <MagneticBtn href="#contact">Hablemos →</MagneticBtn>
+        </div>
       </div>
 
-      {/* 4. Indicador de Scroll: Usamos border-foreground/20 */}
-      <motion.div
-        className="absolute bottom-12 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+      {/* scroll indicator */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '40px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '10px',
+          opacity: ready ? 0.35 : 0,
+          transition: 'opacity 0.6s ease 1.2s',
+        }}
       >
-        <div className="w-6 h-10 rounded-full border-2 border-foreground/20 flex items-start justify-center p-2">
-          <motion.div
-            className="w-1.5 h-1.5 rounded-full bg-primary"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-        </div>
-      </motion.div>
+        <span
+          style={{
+            fontSize: '10px',
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            fontFamily: "'JetBrains Mono', monospace",
+          }}
+        >
+          scroll
+        </span>
+        <div
+          className="scroll-line"
+          style={{
+            width: '1px',
+            height: '48px',
+            background: 'linear-gradient(to bottom, var(--fg), transparent)',
+          }}
+        />
+      </div>
     </section>
-  );
+  )
 }

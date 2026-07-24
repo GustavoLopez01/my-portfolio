@@ -1,71 +1,146 @@
-import * as motion from "motion/react-client";
-import SkillCard from "./ui/SkillCard";
-import { SOFT_SKILLS } from "../constants";
-import { Code2, Sparkles, Zap, Shield } from "lucide-react";
+import Label from './ui/Label';
 
 export default function About() {
-  const highlights = [
-    {
-      icon: Code2,
-      title: "Full-Stack Development",
-      description: "Expert in building end-to-end solutions with React, Node.js, and modern frameworks",
-    },
-    {
-      icon: Zap,
-      title: "Performance",
-      description: "Obsessed with creating lightning-fast, optimized user experiences",
-    },
-    {
-      icon: Sparkles,
-      title: "Modern UI/UX",
-      description: "Crafting beautiful, accessible interfaces that users love",
-    },
-    {
-      icon: Shield,
-      title: "Best Practices",
-      description: "Writing clean, maintainable code with comprehensive testing",
-    },
-  ];
-
   return (
-    <section id="about" className="py-32 px-8 relative">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
-          <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20">
-            <span className="text-sm text-violet-400">About Me</span>
-          </div>
-          <h2 className="text-5xl mb-6">Turning ideas into reality</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            I'm a passionate software developer with 5+ years of experience building scalable web applications.
-            I specialize in creating seamless user experiences backed by robust, performant code.
+    <section id="about" style={{ padding: '128px 48px' }}>
+      <div
+        style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '80px',
+          alignItems: 'center',
+        }}
+      >
+        {/* text */}
+        <div className="reveal section-hidden">
+          <Label n="01">Sobre mí</Label>
+          <h2
+            style={{
+              fontFamily: "'DM Serif Display', serif",
+              fontSize: 'clamp(32px, 3.5vw, 52px)',
+              lineHeight: '1.08',
+              letterSpacing: '-0.035em',
+              marginBottom: '28px',
+              marginTop: '18px',
+            }}
+          >
+            No construyo páginas.
+            <br />
+            <span style={{ fontStyle: 'italic', color: 'rgba(240,237,230,0.35)' }}>
+              Construyo experiencias.
+            </span>
+          </h2>
+          <p
+            style={{
+              fontSize: '16px',
+              lineHeight: '1.85',
+              color: 'rgba(240,237,230,0.55)',
+              marginBottom: '18px',
+            }}
+          >
+            Soy un desarrollador Front-End con más de 4 años de experiencia construyendo interfaces
+            que equilibran estética y rendimiento. Me especializo en React, TypeScript y CSS avanzado
+            — pero lo que me apasiona es cerrar esa brecha entre diseño y código.
           </p>
-        </motion.div>
+          <p
+            style={{
+              fontSize: '16px',
+              lineHeight: '1.85',
+              color: 'rgba(240,237,230,0.55)',
+              marginBottom: '48px',
+            }}
+          >
+            Cada proyecto es una oportunidad de crear algo que la gente disfrute usar: intuitivo,
+            veloz y con microinteracciones que hacen que todo se sienta <em>vivo</em>. Creo que los
+            detalles distinguen un producto bueno de uno memorable.
+          </p>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {highlights.map((item, index) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
-            >
-              <div className="w-14 h-14 rounded-xl bg-linear-to-br from-violet-500/20 to-cyan-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                <item.icon className="w-7 h-7 text-violet-400" />
+          <div style={{ display: 'flex', gap: '48px' }}>
+            {(
+              [
+                ['4+', 'Años de exp.'],
+                ['20+', 'Proyectos'],
+                ['98', 'Lighthouse avg'],
+              ] as [string, string][]
+            ).map(([n, l]) => (
+              <div key={l}>
+                <p
+                  style={{
+                    fontFamily: "'DM Serif Display', serif",
+                    fontSize: '40px',
+                    color: 'var(--accent)',
+                    lineHeight: 1,
+                  }}
+                >
+                  {n}
+                </p>
+                <p
+                  style={{
+                    fontSize: '11px',
+                    color: 'rgba(240,237,230,0.35)',
+                    marginTop: '6px',
+                    letterSpacing: '0.06em',
+                  }}
+                >
+                  {l}
+                </p>
               </div>
-              <h3 className="text-xl mb-3">{item.title}</h3>
-              <p className="text-muted-foreground">{item.description}</p>
-            </motion.div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        {/* image */}
+        <div className="reveal section-hidden" style={{ position: 'relative' }}>
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              border: '1px solid var(--border)',
+              transform: 'translate(14px, 14px)',
+              pointerEvents: 'none',
+            }}
+          />
+          <img
+            src="https://images.unsplash.com/photo-1549692520-acc6669e2f0c?w=620&h=740&fit=crop&auto=format"
+            alt="Developer working"
+            style={{
+              width: '100%',
+              height: '520px',
+              objectFit: 'cover',
+              display: 'block',
+              filter: 'grayscale(25%)',
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '24px',
+              left: '24px',
+              right: '24px',
+              background: 'rgba(8,8,8,0.82)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid var(--border)',
+              padding: '14px 18px',
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: '11px',
+                color: 'var(--accent)',
+                marginBottom: '4px',
+              }}
+            >
+              $ currently_working_on
+            </p>
+            <p style={{ fontSize: '13px', color: 'rgba(240,237,230,0.65)' }}>
+              Design system + performance optimization sprint
+            </p>
+          </div>
         </div>
       </div>
     </section>
-  );
+  )
 }
