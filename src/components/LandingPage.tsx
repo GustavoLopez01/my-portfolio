@@ -12,12 +12,13 @@ export default function LandingPage() {
   useScrollReveal();
   return (
     <div
+      className="w-full"
       style={{
-        background: 'var(--bg)',
-        color: 'var(--fg)',
-        fontFamily: "'Inter', sans-serif",
-        minHeight: '100vh',
-        cursor: 'none',
+        // background: 'var(--bg)',
+        // color: 'var(--fg)',
+        // fontFamily: "'Inter', sans-serif",
+        // minHeight: '100vh',
+        // cursor: 'none',
       }}
     >
       <CustomCursor />

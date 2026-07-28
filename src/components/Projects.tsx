@@ -1,5 +1,5 @@
-import Label from './ui/Label';
 import ProjectCard from './ui/ProjectCard';
+import TitleSection from './ui/TitleSection';
 
 interface Project {
   id: number
@@ -51,31 +51,18 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      style={{ padding: '128px 48px', background: 'rgba(255,255,255,0.018)' }}
+      className="flex justify-center items-center bg-[rgba(255,255,255,0.018)]"
+      style={{ padding: '128px 48px' }}
     >
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div className="reveal section-hidden" style={{ marginBottom: '64px' }}>
-          <Label n="02">Proyectos</Label>
-          <h2
-            style={{
-              fontFamily: "'DM Serif Display', serif",
-              fontSize: 'clamp(32px, 3.5vw, 52px)',
-              lineHeight: '1.08',
-              letterSpacing: '-0.035em',
-              marginTop: '18px',
-            }}
-          >
-            Trabajo que habla
-            <br />
-            <span style={{ fontStyle: 'italic', color: 'rgba(240,237,230,0.32)' }}>
-              por sí solo.
-            </span>
-          </h2>
-        </div>
+      <div className="max-w-7xl m-auto">
+        <TitleSection
+          label="Proyectos"
+          number="02"
+          firstLine="Trabajo que habla"
+          secondLine="por sí solo."
+        />
 
-        <div
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {PROJECTS.map((p, i) => (
             <ProjectCard key={p.id} p={p} delay={i * 0.1} />
           ))}

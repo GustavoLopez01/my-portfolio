@@ -1,5 +1,5 @@
-import Label from "./ui/Label";
 import SkillItem from "./ui/SkillItem";
+import TitleSection from "./ui/TitleSection";
 
 const SKILLS: Record<string, string[]> = {
   Core: ['HTML5 & Semantics', 'CSS3 & Animations', 'JavaScript ES2024+', 'TypeScript 5'],
@@ -10,30 +10,21 @@ const SKILLS: Record<string, string[]> = {
 
 export default function Skills() {
   return (
-    <section id="skills" style={{ padding: '128px 48px' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div className="reveal section-hidden" style={{ marginBottom: '64px' }}>
-          <Label n="03">Habilidades</Label>
-          <h2
-            style={{
-              fontFamily: "'DM Serif Display', serif",
-              fontSize: 'clamp(32px, 3.5vw, 52px)',
-              lineHeight: '1.08',
-              letterSpacing: '-0.035em',
-              marginTop: '18px',
-            }}
-          >
-            Herramientas en
-            <br />
-            <span style={{ fontStyle: 'italic', color: 'rgba(240,237,230,0.32)' }}>
-              mi arsenal.
-            </span>
-          </h2>
-        </div>
+    <section
+      id="skills"
+      className="grid justify-center items-center"
+      style={{ padding: '128px 48px' }}
+    >
+      <div className="max-w-7xl m-auto">
+        <TitleSection
+          label="Habilidades"
+          number="03"
+          firstLine="Herramientas en"
+          secondLine="mi arsenal."
+        />
 
         <div
-          className="reveal section-hidden"
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '52px' }}
+          className="reveal grid grid-cols-2 md:grid-cols-4 gap-10"
         >
           {Object.entries(SKILLS).map(([cat, items]) => (
             <div key={cat}>

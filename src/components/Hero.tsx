@@ -69,14 +69,14 @@ export default function Hero() {
 
   return (
     <section
+      className="w-full relative flex flex-col justify-center"
       id="hero"
       style={{
         minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
+        // display: 'flex',
+        // flexDirection: 'column',
+        // justifyContent: 'center',
         padding: '0 48px',
-        position: 'relative',
         overflow: 'hidden',
       }}
     >

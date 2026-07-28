@@ -10,14 +10,8 @@ export default function Home() {
   const [language, setLanguage] = useState<Language>("es");
 
   return (
-    <ChangeTabContext.Provider
-      value={{
-        currentSection
-      }}
-    >
-      <div className="relative min-h-screen bg-background text-foreground">
-        <LandingPage />
-      </div>
-    </ChangeTabContext.Provider>
+    <div className="relative w-screen">
+      <LandingPage />
+    </div>
   );
 }
