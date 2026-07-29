@@ -2,13 +2,13 @@ import TitleSection from './ui/TitleSection';
 
 export default function About() {
   return (
-    <section 
+    <section
       id="about"
       className="grid justify-center items-center"
       style={{ padding: '128px 48px' }}
     >
       <div
-        className="max-w-7xl gap-20 items-center m-auto grid grid-cols-1 md:grid-cols-2"
+        className="max-w-7xl gap-20 items-center m-auto grid grid-cols-1 md:grid-cols-2 reveal section-hidden"
       >
         {/* text */}
         <div className="flex flex-col">
@@ -40,23 +40,14 @@ export default function About() {
             ).map(([n, l]) => (
               <div key={l}>
                 <p
+                  className="font-dmserif text-[40px] text-accent"
                   style={{
-                    fontFamily: "'DM Serif Display', serif",
-                    fontSize: '40px',
-                    color: 'var(--accent)',
                     lineHeight: 1,
                   }}
                 >
                   {n}
                 </p>
-                <p
-                  style={{
-                    fontSize: '11px',
-                    color: 'rgba(240,237,230,0.35)',
-                    marginTop: '6px',
-                    letterSpacing: '0.06em',
-                  }}
-                >
+                <p className="text-xs text-[rgba(240,237,230,0.35)] mt-1.5! tracking-wider">
                   {l}
                 </p>
               </div>
@@ -64,51 +55,22 @@ export default function About() {
           </div>
         </div>
 
-        {/* image */}
-        <div className="hidden md:block" style={{ position: 'relative' }}>
+        <div className="hidden md:block relative">
           <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              border: '1px solid var(--border)',
-              transform: 'translate(14px, 14px)',
-              pointerEvents: 'none',
-            }}
+            className="absolute pointer-events-none inset-0 border border-accent transform-[translate(14px, 14px)]"
           />
           <img
             src="https://images.unsplash.com/photo-1549692520-acc6669e2f0c?w=620&h=740&fit=crop&auto=format"
             alt="Developer working"
-            style={{
-              width: '100%',
-              height: '520px',
-              objectFit: 'cover',
-              display: 'block',
-              filter: 'grayscale(25%)',
-            }}
+            className="w-full h-130 object-cover block filter-[grayscale(25%)]"
           />
           <div
-            style={{
-              position: 'absolute',
-              bottom: '24px',
-              left: '24px',
-              right: '24px',
-              background: 'rgba(8,8,8,0.82)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid var(--border)',
-              padding: '14px 18px',
-            }}
+            className="absolute py-3.5! px-4.5! bottom-6 left-6 right-6 bg-[rgba(8,8,8,0.82)] border border-border backdrop-filter-[blur(10px)]"
           >
-            <p
-              style={{
-                fontFamily: "'JetBrains Mono', monospace",
-                fontSize: '11px',
-                color: 'var(--accent)',
-                marginBottom: '4px',
-              }}
-            >
+            <p className="font-dmserif text-xs text-accent mb-1!">
               $ currently_working_on
             </p>
-            <p style={{ fontSize: '13px', color: 'rgba(240,237,230,0.65)' }}>
+            <p className="text-[13px] text-[rgba(240,237,230,0.65)]">
               Design system + performance optimization sprint
             </p>
           </div>

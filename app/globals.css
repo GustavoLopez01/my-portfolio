@@ -8,10 +8,16 @@
   --card: #111111;
   --muted: #444444;
   --border: rgba(240, 237, 230, 0.08);
+  --bg-size-about: 64px 64px;
 }
 
 @theme {
   --color-fg: var(--fg);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+
+  --font-jetbrains: "JetBrains Mono";
+  --font-dmserif: "DM Serif Display";
 }
 
 *,

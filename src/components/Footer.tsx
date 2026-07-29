@@ -1,32 +1,11 @@
 export default function Footer() {
   return (
-    <footer
-      style={{
-        padding: '28px 48px',
-        borderTop: '1px solid var(--border)',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}
-    >
-      <span
-        style={{
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: '10px',
-          color: 'rgba(240,237,230,0.2)',
-          letterSpacing: '0.1em',
-        }}
-      >
-        © 2024 Juan Díaz — Built with React + Vite
+    <footer className="flex justify-between items-center border-t border-[var(--border)] py-7! px-12!">
+      <span className="text-xs tracking-widest font-jetbrains text-[rgba(240,237,230,0.2)]">
+        © {new Date().getFullYear()} Gustavo López
       </span>
       <span
-        style={{
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: '10px',
-          color: 'rgba(240,237,230,0.2)',
-          letterSpacing: '0.1em',
-        }}
-      >
+        className="font-jetbrains text-xs tracking-widest color-[rgba(240,237,230,0.2)]">
         Diseño & Código propio
       </span>
     </footer>
