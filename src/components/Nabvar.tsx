@@ -91,12 +91,15 @@ const MobileMenu = ({
   isOpen: boolean,
   toggleMenu: () => void
 }) => {
-  const menuRef = useRef(null);
+  const menuRef = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (isOpen && menuRef.current && !menuRef.current.contains(event.target)) {
-        toggleMenu();
+      if (isOpen && menuRef.current) {
+        const currentElement = menuRef.current as HTMLElement;
+        if (!currentElement.contains(event.target as Node)) {
+          toggleMenu();
+        }
       }
     };
 
@@ -108,6 +111,7 @@ const MobileMenu = ({
 
   return (
     <div
+      id="container-mobile-menu"
       ref={menuRef}
       className="relative w-full z-102"
     >
